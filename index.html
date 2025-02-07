@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SUNKISSER THE OBLITERATOR OF TOAD&#8217;S</title>
+  <!--I can't for the life of me make the 'S work. I tried all the codes on this site...https://stackoverflow.com/questions/419718/html-code-for-an-apostrophe-->
+
+  <!--  Press Start 2P font from Google Fonts I wanted a game feel-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+  <style>
+    body {
+      font-family: 'Press Start 2P', monospace;
+      margin: 2rem;
+      background-color: #69094d;
+    }
+    #container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    /* button styling to  */
+    .choice-btn {
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #b565a7;  /* Button color */
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.8rem;
+      transition: background-color 0.3s ease; /* like easy ease in afteer effects...*/
+    }
+    .choice-btn:hover {
+      background-color: #9c4499;  /* Hover color */
+    }
+    .choice-btn:active {
+      background-color: #82317e;  /* Click (active) color */
+    }
+    #passage-img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <h1>SUNKISSER THE OBLITERATOR OF TOAD'S</h1>
+    <div id="story"></div>
+    <div id="choices"></div>
+  </div>
+<!-- well nevermind here is where I "fixed" my 'S issue...oops!-->
+  <script>
+    const passages = {
+      start: {
+        text: "Welcome to the legend of Sunkisser, the Obliterator of Toads. You are Sunkisser, a legendary hero called upon to battle an ancient toad menace. Your journey begins in your quaint village of Landanomopolisis. What will you do?",
+        img: "imgs/Unicorn.jpeg", //SUNKISSER Adobe STOck
+        choices: [
+          { text: "Investigate the mysterious message from the old sage.", target: "investigate" },
+          { text: "Ignore the warning and pursue personal glory.", target: "ignore" },
+          { text: "Seek allies to bolster your strength.", target: "allies" }
+        ]
+      },
+      investigate: {
+        text: "You decide to investigate the sage's message. Following a foggy road, you uncover ancient carvings that hint at the origins of the toad threat.",
+        img: "imgs/runes.jpeg",
+        choices: [
+          { text: "Continue down the foggy road.", target: "decisionPoint1" }//Adobestock Photo
+        ]
+      },
+      ignore: {
+        text: "You choose to ignore the warning, eager for personal glory. As you head toward a rival kingdom, eerie shadows hint at a lurking danger.",
+        img: "imgs/lonely  unicorn.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Press onward to face the unknown.", target: "decisionPoint1" }
+        ]
+      },
+      allies: {
+        text: "Realizing the threat's magnitude, you gather allies—a wise mage, a fearless knight, and a cunning thief. With your band assembled, you set off on your quest.",
+        img: "imgs/TEAM.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Embark on your journey with your newfound allies.", target: "decisionPoint1" }
+        ]
+      },
+      decisionPoint1: {
+        text: "On your journey, you reach a crossroads. To the left lies a treacherous swamp, to the right a rocky trail, and straight ahead an enchanted grove.",
+        img: "imgs/crossroads.png",//Draawn by myself on Procreate
+        choices: [
+          { text: "Take the Swampy Path.", target: "swamp" },
+          { text: "Take the Rocky Trail.", target: "rocky" },
+          { text: "Detour to the Enchanted Grove.", target: "grove" }
+        ]
+      },
+      swamp: {
+        text: "Venturing into the swamp, you're ambushed by toad warriors. In the melee, you discover a hidden shrine filled with powerful artifacts.",
+        img: "imgs/Firefly toad warriors 1296.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Seize the artifacts and continue.", target: "decisionPoint2" }
+        ]
+      },
+      rocky: {
+        text: "Following the rocky trail, you cross paths with a rival knight. A duel ensues, testing your combat skills and resolve.",
+        img: "imgs/meet.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Fight the knight.", target: "fightKnight" },
+          { text: "Attempt to negotiate with the knight.", target: "negotiateKnight" }
+        ]
+      },
+      grove: {
+        text: "In the enchanted grove, a mystical druid imparts secret lore about the toads, giving you insights that might change the course of your quest.",
+        img: "imgs/druid.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Embrace the druid's wisdom.", target: "decisionPoint2" }
+        ]
+      },
+      fightKnight: {
+        text: "You engage in a fierce duel. Although you defeat the knight, the encounter leaves its mark on your soul.",
+        img: "imgs/Knight.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Continue on your journey.", target: "decisionPoint2" }
+        ]
+      },
+      negotiateKnight: {
+        text: "You choose diplomacy over combat. The rival knight, impressed by your resolve, agrees to join your cause.",
+        img: "imgs/friends.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Move forward with your strengthened force.", target: "decisionPoint2" }
+        ]
+      },
+      decisionPoint2: {
+        text: "At last, you arrive at a ruined citadel—the epicenter of the uprising now swarming with sentient toads. How will you confront this threat?",
+        img: "imgs/Firefly Citadel.jpg",//Firefly Generated Image Promt ruined citadel—the epicenter of the uprising now swarming with sentient toads
+        choices: [
+          { text: "Launch a direct assault.", target: "directAssault" },
+          { text: "Attempt to negotiate a truce.", target: "truce" },
+          { text: "Set a cunning trap.", target: "trap" },
+          { text: "Sacrifice yourself for a greater good.", target: "martyr" },
+          { text: "Walk away from the conflict.", target: "wanderer" }
+        ]
+      },
+      directAssault: {
+        text: "You lead a bold assault on the citadel. In the heat of battle, you defeat the toad leader—but victory is marred by the heavy losses you endure.",
+        img: "imgs/Firefly war destruction.jpg",//Abobe Firefly Generated Image Prompt war destructionheavy damage citadel
+        choices: [
+          { text: "Heroic Victory Ending", target: "endingVictory" }
+        ]
+      },
+      truce: {
+        text: "You open negotiations with the toad leader. Miraculously, a dialogue ensues and a peaceful alliance is forged.",
+        img: "imgs/toad leader.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Peaceful Alliance Ending", target: "endingPeace" }
+        ]
+      },
+      trap: {
+        text: "You employ your cunning, setting a trap with the aid of ancient artifacts. The toad horde falls into your ambush—but unforeseen consequences soon follow.",
+        img: "imgs/TRAP.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Cursed Dominion Ending", target: "endingCursed" }
+        ]
+      },
+      martyr: {
+        text: "Choosing the path of self-sacrifice, you give your life in a final act of valor. Your noble death unites warring factions, echoing through the ages.",
+        img: "imgs/Firefly Unicorn.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Tragic Martyr Ending", target: "endingMartyr" }
+        ]
+      },
+      wanderer: {
+        text: "Disillusioned by the endless cycle of violence, you opt to leave the conflict behind. You wander the land in search of a deeper truth, your legacy becoming a mystery.",
+        img: "imgs/mystery.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Wanderer Ending", target: "endingWanderer" }
+        ]
+      },
+      // Endings:
+      endingVictory: {
+        text: "In a dazzling display of valor, you secure a heroic victory. The realms celebrate your triumph, though the cost was great.",
+        img: "imgs/Triumph.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Restart the Adventure", target: "start" }
+        ]
+      },
+      endingPeace: {
+        text: "Against all odds, you forge a lasting peace between man and toad. Your diplomatic triumph heralds a new era of unity.",
+        img: "imgs/medal ceremony.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Restart the Adventure", target: "start" }
+        ]
+      },
+      endingCursed: {
+        text: "Your trap works—but its dark consequences curse the land. The toads seize power, and your legacy is forever shadowed by regret.",
+        img: "imgs/land toad rule.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Restart the Adventure", target: "start" }
+        ]
+      },
+      endingMartyr: {
+        text: "Your sacrifice, though tragic, inspires peace and unity. The story of your martyrdom becomes legend.",
+        img: "imgs/Legend of the unicorn.jpg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Restart the Adventure", target: "start" }
+        ]
+      },
+      endingWanderer: {
+        text: "By walking away, you choose introspection over conflict. Your journey becomes one of self-discovery, leaving your legend open to interpretation.",
+        img: "imgs/Unicorn.jpeg",//Adobe Firefly Generated IMage 
+        choices: [
+          { text: "Restart the Adventure", target: "start" }
+        ]
+      }
+    };
+
+    // Function to display a passage based on its ID.
+    function showPassage(passageId) {
+      const passage = passages[passageId];
+      const storyDiv = document.getElementById("story");
+      const choicesDiv = document.getElementById("choices");
+
+      // Build the HTML for the passage:
+      let html = "";
+      if (passage.img) {
+        html += `<img id="passage-img" src="${passage.img}" alt="Scene image">`;
+      }
+      html += `<p>${passage.text}</p>`;
+      storyDiv.innerHTML = html;
+
+      // Clear out previous choices.
+      choicesDiv.innerHTML = "";
+
+      // Create a button for each choice.
+      passage.choices.forEach(choice => {
+        const button = document.createElement("button");
+        button.className = "choice-btn";
+        button.textContent = choice.text;
+        button.onclick = () => showPassage(choice.target);
+        choicesDiv.appendChild(button);
+      });
+    }
+
+    // Start the story at the "start" passage.
+    showPassage("start");
+  </script>
+</body>
+</html>
